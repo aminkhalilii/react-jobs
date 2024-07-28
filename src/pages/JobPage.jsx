@@ -1,11 +1,15 @@
-import { useParams, useLoaderData } from "react-router";
+import { useParams, useLoaderData, useNavigate } from "react-router";
 import { fetchApi } from "../service";
 import { FaArrowLeft, FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
-const JobPage = () => {
+const JobPage = ({ deleteJob }) => {
 	const { id } = useParams();
 	const job = useLoaderData();
-
+	const navigate = useNavigate();
+	const deleteJobSubmit = (id) => {
+		deleteJob(id);
+		return navigate("/jobs");
+	};
 	return (
 		<>
 			<section>
@@ -78,7 +82,10 @@ const JobPage = () => {
 								>
 									Edit Job
 								</Link>
-								<button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
+								<button
+									onClick={() => deleteJobSubmit(job.id)}
+									className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+								>
 									Delete Job
 								</button>
 							</div>
