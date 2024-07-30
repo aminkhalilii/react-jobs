@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddJobPage = ({ addJobSubmit }) => {
 	const [fields, setFields] = useState({});
@@ -26,7 +27,9 @@ const AddJobPage = ({ addJobSubmit }) => {
 			},
 		};
 		addJobSubmit(newJob);
-		return navigate("/jobs");
+		toast.success("Job create successfully");
+
+		navigate("/jobs");
 	};
 	return (
 		<section className="bg-indigo-50">
