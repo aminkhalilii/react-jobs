@@ -1,10 +1,11 @@
-import { useParams, useLoaderData, useNavigate } from "react-router";
+import {  useLoaderData, useNavigate } from "react-router";
 import { fetchApi } from "../service";
 import { FaArrowLeft, FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const JobPage = ({ deleteJob }) => {
+	
 	const job = useLoaderData();
 	const navigate = useNavigate();
 	const deleteJobSubmit = (id) => {
