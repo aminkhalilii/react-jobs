@@ -83,6 +83,18 @@
         "contactEmail": "contact@ipsumlorem.com",
         "contactPhone": "555-555-5555"
       }
+    },
+    {
+      "id": "f5b1",
+      "type": "Remote",
+      "title": "asdas",
+      "description": "dsad",
+      "salary": "$60K - 70K",
+      "location": "ds",
+      "company": "dasdsa",
+      "company_description": "asdas",
+      "contact_email": "test@test.com",
+      "contact_phone": "asd"
     }
   ]
 }
