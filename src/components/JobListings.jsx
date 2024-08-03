@@ -1,15 +1,12 @@
+import { useGetJobs } from "../hooks/useGetJobs";
 import JobListing from "./JobListing";
 import Spinner from "./Spinner";
-import { fetchApi } from "../service";
-import { useQuery } from "react-query";
 const JobListings = ({ isHome = false }) => {
-	const {data:jobs,isLoading,isError,error,refetch} = useQuery(["cat"],async()=>{
-		 return await fetchApi("jobs");
-		
-   })
+	// const {data:jobs,isLoading,isError,error,refetch} = useQuery(["cat"],async()=>{
+	// 	 return await fetchApi("jobs");
 
-
-
+	//  })
+	const { data: jobs, isLoading, isError, error, refetchData } = useGetJobs();
 
 	// useEffect(() => {
 	// 	const fetchJobs = async () => {
@@ -24,11 +21,11 @@ const JobListings = ({ isHome = false }) => {
 	// 	};
 	// 	fetchJobs();
 	// }, []);
-	let jobsList = []
-	if(jobs){
- jobsList = isHome ? jobs?.slice(0, 3) : jobs;
+	let jobsList = [];
+	if (jobs) {
+		jobsList = isHome ? jobs?.slice(0, 3) : jobs;
 	}
-	
+
 	return (
 		<section className="bg-blue-50 px-4 py-10">
 			<div className="container-xl lg:container m-auto">
@@ -36,7 +33,6 @@ const JobListings = ({ isHome = false }) => {
 					Browse Jobs
 				</h2>
 				{isError && error.message}
-
 
 				{isLoading ? (
 					<Spinner loading={isLoading} />
@@ -48,6 +44,12 @@ const JobListings = ({ isHome = false }) => {
 					</div>
 				)}
 			</div>
+			<button
+				onClick={refetchData}
+				className="p-2 m-4 bg-green-900 rounded-md mx-auto text-white"
+			>
+				refetch data
+			</button>
 		</section>
 	);
 };
