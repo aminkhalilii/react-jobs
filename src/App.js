@@ -13,6 +13,8 @@ import AddJobPage2 from "./pages/AddJobPage2";
 import { fetchApi } from "./service";
 import EditJobPage from "./pages/EditJobPage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider } from "react-redux";
+import { store } from "./store";
 const App = () => {
 	// add new job
 	const client = new QueryClient({
@@ -75,7 +77,9 @@ const App = () => {
 	);
 	return (
 		<QueryClientProvider client={client}>
-			<RouterProvider router={router} />
+			<Provider store={store }>
+				<RouterProvider router={router} />
+			</Provider>
 		</QueryClientProvider>
 	);
 };
