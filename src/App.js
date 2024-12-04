@@ -1,9 +1,4 @@
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from "react-router-dom";
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import MainLayout from "./layouts/MainLayout";
 import JobsPage from "./pages/JobsPage";
@@ -16,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "./store";
 const App = () => {
+
 	// add new job
 	const client2 = new QueryClient({
 		defaultOptions: {
@@ -82,6 +78,7 @@ const App = () => {
 			</Provider>
 		</QueryClientProvider>
 	);
+
 };
 
 export default App;
