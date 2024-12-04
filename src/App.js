@@ -11,61 +11,74 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { store } from "./store";
 const App = () => {
-    const addJob = async (newJob) => {
-        await fetchApi("jobs", {
-            method: "Post",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newJob),
-        });
-        return;
-    };
-    const editJob = async (job) => {
-        await fetchApi(`jobs/${job.id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(job),
-        });
-        return;
-    };
-    const deleteJob = async (id) => {
-        await fetchApi(`jobs/${id}`, {
-            method: "DELETE",
-        });
-        return;
-    };
-	
-    const client = new QueryClient({
-        defaultOptions: {
-            queries: {
-                refetchOnWindowFocus: false,
-            },
-            mutations: {},
-        },
-    });
 
-    const router = createBrowserRouter(
-        createRoutesFromElements(
-            <Route path="/" element={<MainLayout />}>
-                <Route index element={<HomePage />} />
-                <Route path="/jobs" element={<JobsPage />} />
-                <Route path="/jobs/:id" loader={jobLoader} element={<JobPage deleteJob={deleteJob} />} />
-                <Route path="/add-job" element={<AddJobPage2 addJobSubmit={addJob} />} />
-                <Route path="/jobs/edit/:id" loader={jobLoader} element={<EditJobPage editJobSubmit={editJob} />} />
-                <Route path="*" element={<NotFound />} />
-            </Route>
-        )
-    );
-    return (
-        <QueryClientProvider client={client}>
-            <Provider store={store}>
-                <RouterProvider router={router} />
-            </Provider>
-        </QueryClientProvider>
-    );
+	// add new job
+	const client2 = new QueryClient({
+		defaultOptions: {
+			queries: {
+				refetchOnWindowFocus: false,
+			},
+			mutations: {},
+		},
+	});
+	const addJob = async (newJob) => {
+		await fetchApi("jobs", {
+			method: "Post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(newJob),
+		});
+		return;
+	};
+	const editJob = async (job) => {
+		await fetchApi(`jobs/${job.id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(job),
+		});
+		return;
+	};
+	// delete job
+	const deleteJob = async (id) => {
+		await fetchApi(`jobs/${id}`, {
+			method: "DELETE",
+		});
+		return;
+	};
+	const router = createBrowserRouter(
+		createRoutesFromElements(
+			<Route path="/" element={<MainLayout />}>
+				<Route index element={<HomePage />} />
+				<Route path="/jobs" element={<JobsPage />} />
+				<Route
+					path="/jobs/:id"
+					loader={jobLoader}
+					element={<JobPage deleteJob={deleteJob} />}
+				/>
+				<Route
+					path="/add-job"
+					element={<AddJobPage2 addJobSubmit={addJob} />}
+				/>
+				<Route
+					path="/jobs/edit/:id"
+					loader={jobLoader}
+					element={<EditJobPage editJobSubmit={editJob} />}
+				/>
+				<Route path="*" element={<NotFound />} />
+			</Route>
+		)
+	);
+	return (
+		<QueryClientProvider client={client}>
+			<Provider store={store }>
+				<RouterProvider router={router} />
+			</Provider>
+		</QueryClientProvider>
+	);
+
 };
 
 export default App;
