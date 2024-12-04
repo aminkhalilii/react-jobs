@@ -17,7 +17,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 const App = () => {
 	// add new job
-	const client = new QueryClient({
+	const client2 = new QueryClient({
 		defaultOptions: {
 			queries: {
 				refetchOnWindowFocus: false,
